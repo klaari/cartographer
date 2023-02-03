@@ -15,7 +15,7 @@
     },
     "require": {
         "php": ">=5.4",
-        "league/flysystem": "3.x-dev"
+        "league/flysystem": "^3.0"
     },
     "autoload": {
         "files": [
