@@ -1,8 +1,9 @@
 <?php
+use PHPUnit\Framework\TestCase;
 use League\Flysystem\Filesystem;
 use League\Flysystem\Adapter\Local as LocalAdapter;
 
-class GeneratorTest extends PHPUnit_Framework_TestCase
+class SitemapFactoryTest extends TestCase
 {
     /**
      * @var Tackk\Cartographer\SitemapFactory
@@ -14,7 +15,7 @@ class GeneratorTest extends PHPUnit_Framework_TestCase
      */
     protected $filesystem;
 
-    public function setUp()
+    public function setUp(): void
     {
         $adapter = new LocalAdapter(__DIR__.'/storage/sitemaps');
         $this->filesystem = new Filesystem($adapter);
@@ -34,10 +35,10 @@ class GeneratorTest extends PHPUnit_Framework_TestCase
     public function testSetBaseUrl()
     {
         $this->factory->setBaseUrl('foo/');
-        $this->assertAttributeEquals('foo', 'baseUrl', $this->factory);
+        $this->assertEquals('foo', $this->factory->getBaseUrl());
 
         $this->factory->setBaseUrl('foo');
-        $this->assertAttributeEquals('foo', 'baseUrl', $this->factory);
+        $this->assertEquals('foo', $this->factory->getBaseUrl());
     }
 
     public function testGetBaseUrl()
@@ -62,7 +63,7 @@ class GeneratorTest extends PHPUnit_Framework_TestCase
 
     public function testCreateRequiresIterator()
     {
-        $this->setExpectedException('PHPUnit_Framework_Error');
+        $this->expectException(\ArgumentCountError::class);
         $this->factory->createSitemap();
     }
 
@@ -111,7 +112,7 @@ XML;
 
     public function testUrlMustBePresent()
     {
-        $this->setExpectedException('InvalidArgumentException', 'Url is missing or not accessible.');
+        $this->expectException('InvalidArgumentException', 'Url is missing or not accessible.');
         $this->factory->createSitemap(new ArrayIterator([[]]));
     }
 }
