@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Local as LocalAdapter;
+use League\Flysystem\Local\LocalFilesystemAdapter as LocalAdapter;
 
 class SitemapFactoryTest extends TestCase
 {
@@ -29,7 +29,7 @@ class SitemapFactoryTest extends TestCase
 
     public function testGetFilesystem()
     {
-        $this->assertInstanceOf('League\Flysystem\FilesystemInterface', $this->factory->getFilesystem());
+        $this->assertInstanceOf('League\Flysystem\FilesystemOperator', $this->factory->getFilesystem());
     }
 
     public function testSetBaseUrl()

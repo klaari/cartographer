@@ -5,13 +5,13 @@ namespace Tackk\Cartographer;
 use ArrayObject;
 use DateTime;
 use Iterator;
-use League\Flysystem\FilesystemInterface;
+use League\Flysystem\FilesystemOperator;
 use RuntimeException;
 
 class SitemapFactory
 {
     /**
-     * @var FilesystemInterface
+     * @var FilesystemOperator
      */
     protected $filesystem = null;
 
@@ -26,16 +26,16 @@ class SitemapFactory
     protected $filesCreated = [];
 
     /**
-     * @param FilesystemInterface $filesystem
+     * @param FilesystemOperator $filesystem
      */
-    public function __construct(FilesystemInterface $filesystem)
+    public function __construct(FilesystemOperator $filesystem)
     {
         $this->filesystem = $filesystem;
     }
 
     /**
      * Gets the Filesystem.
-     * @return FilesystemInterface
+     * @return FilesystemOperator
      */
     public function getFilesystem()
     {
